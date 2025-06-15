@@ -55,7 +55,6 @@ export const getAllPendaftaran = async (req: Request, res: Response): Promise<vo
     } else if (role === 'KELURAHAN') {
       whereClause = { kelurahan: wilayah };
     }
-    // jika PUSAT maka biarkan kosong (lihat semua data)
 
     const data = await prisma.pendaftaran.findMany({ where: whereClause });
     res.status(200).json(data);

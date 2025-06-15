@@ -34,14 +34,12 @@ const DashboardPage = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>📋 Dashboard</h1>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          {/* ✅ Hanya tampil jika role === 'PUSAT' */}
           {role === 'PUSAT' && (
             <button onClick={handleGoToUsers} style={{ padding: '8px 16px' }}>
               ➕ Tambah User
             </button>
           )}
 
-          {/* Semua role bisa tambah pendaftar */}
           <button onClick={handleGoToPendaftaran} style={{ padding: '8px 16px' }}>
             📝 Tambah Pendaftar
           </button>

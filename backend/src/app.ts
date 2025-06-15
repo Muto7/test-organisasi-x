@@ -15,8 +15,8 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:5173', // asal frontend kamu
-    credentials: true,               // izinkan cookie dan header auth
+    origin: 'http://localhost:5173', 
+    credentials: true,
   }));
 app.use(express.json());
 // app.get('/api/test-db', async (req, res) => {
