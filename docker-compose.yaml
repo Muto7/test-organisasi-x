@@ -4,31 +4,42 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql
-    ports:
-      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: pendaftaran_db
     volumes:
       - mysql-data:/var/lib/mysql
     restart: always
+
   backend:
     build: ./backend
     container_name: backend-app
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./backend:/app
+    expose:
+      - "3000"  # internal port, tidak langsung diakses host
+    environment:
+      - NODE_ENV=production
     restart: always
 
   frontend:
     build: ./frontend-dashboard
     container_name: frontend-app
+    expose:
+      - "80"  # internal port
+    restart: always
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
     ports:
-      - "5173:80"
+      - "80:80"  # host port 80
+      - "443:443"  # nanti untuk SSL
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - backend
-    restart: always
+      - frontend
 
 volumes:
   mysql-data:
+
